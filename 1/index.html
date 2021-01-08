@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .dummy {
+        width: 100%;
+        background: green;
+        height: 1000px;
+      }
+
+      .container {
+        width: 1080px;
+        background: red;
+        margin: 0 auto;
+      }
+
+      svg {
+        vertical-align: bottom;
+      }
+    </style>
+
+    <div class="container">
+      <div class="dummy"></div>
+
+      <div id="svg-container">
+        <!-- Generator: Adobe Illustrator 25.0.1, SVG Export Plug-In  -->
+        <svg
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          width="1126.1px"
+          height="2431.8px"
+          viewBox="0 0 1126.1 2431.8"
+          style="overflow: visible; enable-background: new 0 0 1126.1 2431.8;"
+          xml:space="preserve"
+        >
+          <style type="text/css">
+            .st0 {
+              fill: none;
+              stroke: #ff00ff;
+              stroke-width: 100;
+              stroke-miterlimit: 10;
+            }
+            .st1 {
+              fill: #00ffff;
+            }
+          </style>
+          <defs></defs>
+          <path
+            id="motion-path"
+            class="st0"
+            d="M945,21.1v119.5V185c0,170.6-138.3,308.9-308.9,308.9H358.9C188.3,493.9,50,632.2,50,802.9v0
+	c0,170.6,138.3,308.9,308.9,308.9H636c170.6,0,308.9,138.3,308.9,308.9v5.2c0,170.6-138.3,308.9-308.9,308.9H358.9
+	c-170.6,0-308.9,138.3-308.9,308.9v29c0,170.6,138.3,308.9,308.9,308.9H636h490.1"
+          />
+          <g id="character">
+            <g>
+              <polygon class="st1" points="294.4,157.8 21.1,0 21.1,315.5 		" />
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="dummy"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/MotionPathPlugin.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+
+    <script>
+      const t = gsap.to('#character', {
+        duration: 5,
+        repeat: -1,
+        repeatDelay: 3,
+        yoyo: true,
+        ease: 'power1.inOut',
+        motionPath: {
+          path: '#motion-path',
+          align: '#motion-path',
+          autoRotate: true,
+          alignOrigin: [0.5, 0.5],
+        },
+      })
+      t.progress(0)
+      t.pause()
+
+      const controller = new ScrollMagic.Controller()
+      var scene = new ScrollMagic.Scene({
+        triggerElement: '#svg-container',
+        duration: document.getElementById('svg-container').offsetHeight,
+      })
+        .on('progress', (e) => {
+          t.progress(e.progress)
+        })
+        .addIndicators()
+        .addTo(controller)
+    </script>
+  </body>
+</html>
